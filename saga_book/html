@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フリマサイト</title>
+    <style>
+        /* Basic CSS for styling the webpage */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h2 {
+            margin: auto;
+        }
+        .vertical {
+            writing-mode: vertical-rl;
+        }
+        header {
+            text-align: center;
+            padding-top: 0px;
+            background-color: #f8f8f8;
+            height: 40px;
+        }
+        .name-price-class {
+            margin: 5px;
+            font-size: small;
+        }
+        #target-window {
+            overflow-y: auto;
+        }
+        .product-window {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            padding-bottom: 0;
+            text-align: center;
+
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .banner {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .banner-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-text {
+            margin-right: 30px;
+            font-size: xx-large;
+        }
+        .banner-button {
+            height: 30px;
+        }
+        footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>おすすめ</h2>
+    </header>
+    <div id="target-window">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+    <footer>
+        <div class="icon">&#x21EA;<!-- 上矢印 --></div>
+        <div class="icon">&#x1F50D;<!-- 虫眼鏡 --></div>
+        <div class="icon vertical">出品</div>
+        <div class="icon">&#x1F464;<!-- 人型 --></div>
+    </footer>
+    <script>
+        // JavaScript to dynamically load products
+        document.addEventListener("DOMContentLoaded", function() {
+            const productWindow = document.getElementById('target-window');
+
+            // Function to create a product element
+            function createProductElement(product) {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+
+                const img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.name;
+
+                const name = document.createElement('p');
+                name.textContent = product.name_price;
+                name.className = "name-price-class"
+
+                productDiv.appendChild(img);
+                productDiv.appendChild(name);
+
+                return productDiv;
+            }
+
+            function createBanner() {
+                const bannerDiv = document.createElement('div');
+                bannerDiv.className = 'banner';
+
+                const bannerContent = document.createElement('div');
+                bannerContent.className = 'banner-content';
+
+                const bannerText = document.createElement('div');
+                bannerText.className = 'banner-text';
+                bannerText.textContent = '#心理学'; // ここにバナーのテキストを設定
+
+                const bannerButton = document.createElement('button');
+                bannerButton.className = 'banner-button';
+                bannerButton.textContent = 'コミュニティ'; // ボタンのテキスト
+                bannerButton.onclick = function() {
+                    window.location.href = 'community.html'; // ここに遷移先のURLを設定
+                };
+
+                bannerDiv.appendChild(bannerText);
+                bannerDiv.appendChild(bannerButton);
+                bannerDiv.appendChild(bannerContent);
+
+                return bannerDiv;
+            }
+
+            // Sample products data (normally this would come from a server)
+            const sampleProducts = [];
+            for (let i = 0; i < 15; i++) {
+                sampleProducts.push({
+                    name_price: '商品' + (i + 1) + " " + "¥" + "500",
+                    image: 'syohin_folder/book'+(i+1)+'.png' // Image is left empty as per request
+                });
+            }
+
+
+            // Load products into the product window
+            let product_child = document.createElement('div');
+            product_child.className = "product-window"
+            product_child.id = "productWindow"
+            sampleProducts.forEach((product, index) => {
+                product_child.appendChild(createProductElement(product))
+                
+                if ((index + 1) % 3 === 0) {
+                    productWindow.appendChild(product_child);
+                    product_child = document.createElement('div');
+                    product_child.className = "product-window"
+                    product_child.id = "productWindow"
+                    productWindow.appendChild(createBanner());
+                }
+            });
+        });
+    </script>
+</body>
+</html>

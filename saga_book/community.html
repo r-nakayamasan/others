@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フリマサイト</title>
+    <style>
+        /* Basic CSS for styling the webpage */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h2 {
+            margin: auto;
+        }
+        .vertical {
+            writing-mode: vertical-rl;
+        }
+        header {
+            text-align: center;
+            padding-top: 0px;
+            background-color: #f8f8f8;
+            height: 40px;
+            border-bottom: 1px solid black;
+        }
+        
+        .title {
+            margin-top: 0;
+        }
+        .content {
+            overflow-wrap: break-word;
+        }
+        .product-window {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            padding-bottom: 0;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .banner {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            
+        }
+        .banner-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-text {
+            margin-right: 30px;
+            font-size: xx-large;
+        }
+        
+
+        footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+        .icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>#心理学</h2>
+    </header>
+    <div style="overflow-y: auto;">
+        <div class="banner">
+            <div class="banner-content">
+                <div class="banner-text">
+                    ・授業情報
+                </div>
+            </div>
+        </div>
+        <div id="target-info">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+        <div class="banner">
+            <div class="banner-text">
+                ・ゼミ情報
+            </div>
+        </div>
+        <div id="target-zm">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+    </div>
+        <footer>
+        <div class="icon">&#x21EA;<!-- 上矢印 --></div>
+        <div class="icon">&#x1F50D;<!-- 虫眼鏡 --></div>
+        <div class="icon vertical">出品</div>
+        <div class="icon">&#x1F464;<!-- 人型 --></div>
+    </footer>
+    <script>
+        // JavaScript to dynamically load products
+        document.addEventListener("DOMContentLoaded", function() {
+            const productWindow = document.getElementById('target-info');
+
+            // Function to create a product element
+            function createProductElement(product) {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+
+                const name = document.createElement('p');
+                name.textContent = product.title;
+                name.className = "title"
+                const content = document.createElement('p');
+                content.textContent = product.content;
+                content.className = "content"
+
+                productDiv.appendChild(name);
+                productDiv.appendChild(content);
+
+                return productDiv;
+            }
+
+            // Sample products data (normally this would come from a server)
+            const classinfo = [];
+            for (let i = 0; i < 3; i++) {
+                if (i == 0) {
+                    classinfo.push({
+                        title: "概要",
+                        content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                    });
+                } else {
+                    classinfo.push({
+                        title: "",
+                        content: ""
+                    });
+                };
+            };
+
+
+            // Load products into the product window
+            let product_child = document.createElement('div');
+            product_child.className = "product-window";
+            product_child.id = "productWindow";
+            classinfo.forEach((product, index) => {
+                product_child.appendChild(createProductElement(product))
+            });
+            productWindow.appendChild(product_child);
+
+            const zmWindow = document.getElementById('target-zm');
+
+            // Sample products data (normally this would come from a server)
+            const zminfo = [];
+            for (let i = 0; i < 3; i++) {
+                if (i == 0) {
+                    zminfo.push({
+                        title: "ゼミ",
+                        content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                    });
+                } else {
+                    zminfo.push({
+                        title: "",
+                        content: ""
+                    });
+                };
+            };
+
+
+            // Load products into the product window
+            let zm_child = document.createElement('div');
+            zm_child.className = "product-window";
+            zm_child.id = "productWindow";
+            zminfo.forEach((product, index) => {
+                zm_child.appendChild(createProductElement(product))
+            });
+            zmWindow.appendChild(zm_child);
+
+        });
+    </script>
+</body>
+</html>
