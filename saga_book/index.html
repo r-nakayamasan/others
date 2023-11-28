@@ -78,8 +78,25 @@
             padding: 10px;
             background-color: #f8f8f8;
         }
+        .icon p {
+            font-size: small;
+            margin: 0;
+        }
+        footer {
+            display: flex;
+            justify-content: space-around; /* フッター内のアイテムを均等に配置 */
+            align-items: center; /* 縦方向の中心に配置 */
+        }
         .icon {
+            display: flex;
+            flex-direction: column; /* アイコンとテキストを縦に配置 */
+            align-items: center; /* 横方向の中心に配置 */
+            justify-content: center; /* 縦方向の中心に配置 */
+            text-align: center; /* テキストを中央揃え */
             font-size: 24px;
+        }
+        .icon.vertical {
+            flex-direction: row; /* 特定のアイコンを横に配置 */
         }
     </style>
 </head>
@@ -91,10 +108,10 @@
         <!-- Products will be dynamically loaded here -->
     </div>
     <footer>
-        <div class="icon">&#x21EA;<!-- 上矢印 --></div>
-        <div class="icon">&#x1F50D;<!-- 虫眼鏡 --></div>
-        <div class="icon vertical">出品</div>
-        <div class="icon">&#x1F464;<!-- 人型 --></div>
+        <div class="icon">🏠̆̈<!-- 上矢印 --><p>ホーム</p></div>
+        <div class="icon">&#x1F50D;<!-- 虫眼鏡 --><p>探す</p></div>
+        <div class="icon">📖<p>出品</p></div>
+        <div class="icon">&#x1F464;<!-- 人型 --><p>プロフィール</p></div>
     </footer>
     <script>
         // JavaScript to dynamically load products
@@ -120,7 +137,7 @@
                 return productDiv;
             }
 
-            function createBanner() {
+            function createBanner(cnt) {
                 const bannerDiv = document.createElement('div');
                 bannerDiv.className = 'banner';
 
@@ -129,7 +146,8 @@
 
                 const bannerText = document.createElement('div');
                 bannerText.className = 'banner-text';
-                bannerText.textContent = '#心理学'; // ここにバナーのテキストを設定
+                let community = ['# 心理学', '# 社会学', '# 教育学', '# 英語学', '# 芸術学']
+                bannerText.textContent = community[cnt-1]; // ここにバナーのテキストを設定
 
                 const bannerButton = document.createElement('button');
                 bannerButton.className = 'banner-button';
@@ -167,7 +185,7 @@
                     product_child = document.createElement('div');
                     product_child.className = "product-window"
                     product_child.id = "productWindow"
-                    productWindow.appendChild(createBanner());
+                    productWindow.appendChild(createBanner((index + 1) / 3));
                 }
             });
         });
