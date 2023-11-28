@@ -25,10 +25,11 @@
             padding-top: 0px;
             background-color: #f8f8f8;
             height: 40px;
+            border-bottom: 1px solid black;
         }
         .name-price-class {
             margin: 5px;
-            font-size: small;
+            font-size: 12px;
         }
         #target-window {
             overflow-y: auto;
@@ -94,6 +95,7 @@
             justify-content: center; /* 縦方向の中心に配置 */
             text-align: center; /* テキストを中央揃え */
             font-size: 24px;
+            flex: 1;
         }
         .icon.vertical {
             flex-direction: row; /* 特定のアイコンを横に配置 */
@@ -146,7 +148,7 @@
 
                 const bannerText = document.createElement('div');
                 bannerText.className = 'banner-text';
-                let community = ['# 心理学', '# 社会学', '# 教育学', '# 英語学', '# 芸術学']
+                let community = ['# 心理学', '# 社会学', '# 教育学', '# 日本文学', '# 芸術学']
                 bannerText.textContent = community[cnt-1]; // ここにバナーのテキストを設定
 
                 const bannerButton = document.createElement('button');
@@ -165,9 +167,26 @@
 
             // Sample products data (normally this would come from a server)
             const sampleProducts = [];
+            const book_title = [
+                '感覚と知覚 ¥1700',
+                '集団心理 ¥1650',
+                '行動の謎 ¥1700',
+                '感情の科学 ¥1800',
+                '言語と心 ¥1500',
+                '夢の秘密 ¥1800',
+                '心の発達 ¥1200',
+                '性格の謎 ¥1500',
+                '動機づけ学 ¥2000',
+                'ストレス解消 ¥2100',
+                '',
+                '',
+                '',
+                '',
+                ''
+            ]
             for (let i = 0; i < 15; i++) {
                 sampleProducts.push({
-                    name_price: '商品' + (i + 1) + " " + "¥" + "500",
+                    name_price: book_title[i],
                     image: 'syohin_folder/book'+(i+1)+'.png' // Image is left empty as per request
                 });
             }

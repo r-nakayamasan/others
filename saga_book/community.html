@@ -91,6 +91,7 @@
             justify-content: center; /* 縦方向の中心に配置 */
             text-align: center; /* テキストを中央揃え */
             font-size: 24px;
+            flex: 1;
         }
         .icon.vertical {
             flex-direction: row; /* 特定のアイコンを横に配置 */
@@ -114,7 +115,7 @@
         </div>
         <div class="banner">
             <div class="banner-text">
-                ・ゼミ情報
+                ・教材口コミ
             </div>
         </div>
         <div id="target-zm">
@@ -180,19 +181,18 @@
 
             // Sample products data (normally this would come from a server)
             const zminfo = [];
-            for (let i = 0; i < 3; i++) {
-                if (i == 0) {
-                    zminfo.push({
-                        title: "ゼミ",
-                        content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-                    });
-                } else {
-                    zminfo.push({
-                        title: "",
-                        content: ""
-                    });
-                };
-            };
+            zminfo.push({
+                title: "心理学初級1",
+                content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+            });
+            zminfo.push({
+                title: "初めての認知心理学",
+                content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+            });
+            zminfo.push({
+                title: "",
+                content: ""
+            });
 
 
             // Load products into the product window
